@@ -545,7 +545,7 @@
             <!-- Word count -->
             <span class="flex items-center gap-1">
               <iconify-icon width="18" icon="mingcute:book-2-fill" ></iconify-icon>
-              <span>11 words, 1 min</span>
+              <span>208 words, 1 min</span>
             </span>
             <!-- Categories -->
             
@@ -563,8 +563,30 @@
   </header>
   <!-- content -->
   <article class="post-content prose m-auto dark:prose-invert">
-    <p>这是我的第一篇测试文章</p>
+    <p>这是我的第一篇测试文章，不知道写些什么，就写一些我在搭建博客遇到的问题。</p>
+<ol>
+<li>spawn failed和fatal: unable to access问题</li>
+</ol>
+<ul>
+<li>原因分析:</li>
+</ul>
+<p>　其实出现这个问题，很大可能是因为https和http的proxy的对应的分别是https和http开proxy server，而https的proxy server可能无法正常工作。一个work around是把https的proxy <a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=613757923&content_type=Answer&match_order=3&q=server&zhida_source=entity">server</a>换成http的proxy server:</p>
+<p><strong>解决办法有三种</strong></p>
+<p>修改_config.yml文件的deploy部分，将https 修改为http url 或者 设置为git url, 配置为https oauth2 加token</p>
+<ul>
+<li>设置为git url(推荐)</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">    type: git</span><br><span class="line">    repo: git@github.com:your_github_id/your_github_id.github.io.git</span><br><span class="line">    branch: gh-pages</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li>将https 修改为http url</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line"> type: git</span><br><span class="line"> repo: http://github.com/your_github_id/your_github_id.github.io.git</span><br><span class="line"> branch: gh-pages</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在repo https url上要添加授权方式和token</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">        type: git</span><br><span class="line">        repo: https://oauth2:your_github_token@github.com/your_github_id/your_github_id.github.io.git</span><br><span class="line">        branch: gh-pages</span><br></pre></td></tr></table></figure>
   </article>
 
   <!-- prev and next -->
