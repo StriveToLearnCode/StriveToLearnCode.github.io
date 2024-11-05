@@ -549,7 +549,7 @@
             <!-- Word count -->
             <span class="flex items-center gap-1">
               <iconify-icon width="18" icon="mingcute:book-2-fill" ></iconify-icon>
-              <span>256 words, 1 min</span>
+              <span>401 words, 1 min</span>
             </span>
             <!-- Categories -->
             
@@ -579,7 +579,7 @@
           dark:hover:text-[var(--c-10)]
           dark:hover:bg-[var(--c-theme)]
         ">
-        -"study"
+        study
       </a>
     
   
@@ -601,7 +601,24 @@
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">&#125;</span><br><span class="line">foo.<span class="title function_">call</span>(<span class="variable language_">window</span>)<span class="comment">//window</span></span><br><span class="line">foo.<span class="title function_">call</span>(&#123;<span class="attr">name</span>:<span class="string">&#x27;jack&#x27;</span>,<span class="attr">age</span>:<span class="number">18</span>&#125;)<span class="comment">//&#123;name:&#x27;jack&#x27;,age:18</span></span><br><span class="line">foo.<span class="title function_">call</span>(<span class="number">123</span>)<span class="comment">//Number对象,存放123</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//apply、bind同理</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="new绑定"><a href="#new绑定" class="headerlink" title="new绑定"></a>new绑定</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建Person类</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)<span class="comment">//Person &#123;&#125;</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;why&quot;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p)<span class="comment">//this指向p</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="new绑定"><a href="#new绑定" class="headerlink" title="new绑定"></a>new绑定</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建Person类</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)<span class="comment">//Person &#123;&#125;</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;why&quot;</span>)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p)<span class="comment">//this指向Person&#123;name:&quot;why&quot;&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="这些规则的优先级："><a href="#这些规则的优先级：" class="headerlink" title="这些规则的优先级："></a>这些规则的优先级：</h2><ul>
+<li>默认绑定的优先级是最低的</li>
+<li>显示绑定的优先级高于隐式绑定</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>:<span class="string">&#x27;obj&#x27;</span>,</span><br><span class="line">  <span class="attr">foo</span>:<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="property">foo</span>.<span class="title function_">call</span>(<span class="string">&#x27;abc&#x27;</span>)<span class="comment">//String&#123;&quot;abc&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>new绑定优先级高于隐式绑定</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">name</span>:<span class="string">&#x27;obj&#x27;</span>,</span><br><span class="line">  <span class="attr">foo</span>:<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> obj.<span class="title function_">foo</span>()<span class="comment">//foo&#123;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>new绑定高于显示绑定（new关键字不能和apply&#x2F;call一起使用）</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> bar = foo.<span class="title function_">bind</span>(<span class="string">&quot;aaa&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="title function_">bar</span>() <span class="comment">//foo&#123;&#125;</span></span><br></pre></td></tr></table></figure>
 
 
   </article>
