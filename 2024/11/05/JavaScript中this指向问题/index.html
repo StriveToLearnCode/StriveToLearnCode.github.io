@@ -549,7 +549,7 @@
             <!-- Word count -->
             <span class="flex items-center gap-1">
               <iconify-icon width="18" icon="mingcute:book-2-fill" ></iconify-icon>
-              <span>401 words, 1 min</span>
+              <span>429 words, 2 min</span>
             </span>
             <!-- Categories -->
             
@@ -620,6 +620,7 @@
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> bar = foo.<span class="title function_">bind</span>(<span class="string">&quot;aaa&quot;</span>)</span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="title function_">bar</span>() <span class="comment">//foo&#123;&#125;</span></span><br></pre></td></tr></table></figure>
 
+<p><strong>结论：new绑定 &gt; 显示绑定[apply&#x2F;call&#x2F;bind]&gt;隐式绑定[obj.foo()]&gt;默认绑定[foo( )]</strong></p>
 
   </article>
 
