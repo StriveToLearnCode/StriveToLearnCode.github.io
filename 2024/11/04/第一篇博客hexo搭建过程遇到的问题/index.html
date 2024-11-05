@@ -19,7 +19,7 @@
 
 
 
-<title>我和她在一起二周年啦！！！ | XinYa Huang</title>
+<title>第一篇博客|hexo搭建过程遇到的问题 | XinYa Huang</title>
 
 
 
@@ -515,13 +515,17 @@
 
     <!-- toc -->
     
+  <!-- tocbot -->
+<nav class="post-toc toc text-sm w-40 relative top-32 right-4 opacity-70 hidden lg:block" style="position: fixed !important;"></nav>
+
+
 <section class="px-6 max-w-prose mx-auto md:px-0">
   <!-- Post header before content -->
   <header class="py-4">
     <div class="flex flex-col gap-2 pt-4 md:pt-6">
       <!-- Title -->
       <div id="article-title" class="leading-snug">
-        <p class="text-3xl font-bold text-[var(--c-100)] mb-4">我和她在一起二周年啦！！！</p>
+        <p class="text-3xl font-bold text-[var(--c-100)] mb-4">第一篇博客|hexo搭建过程遇到的问题</p>
       </div>
       <!-- Meta data -->
       <div>
@@ -531,7 +535,7 @@
             <!-- Dates -->
             <div class="flex items-center gap-1">
               <iconify-icon width="18" icon="mingcute:add-circle-fill" ></iconify-icon>
-              Created: <time class="w-max">2024-11-05</time>
+              Created: <time class="w-max">2024-11-04</time>
             </div>
             <div class="flex items-center gap-1">
               <iconify-icon width="18" icon="mingcute:refresh-3-fill" ></iconify-icon>
@@ -545,7 +549,7 @@
             <!-- Word count -->
             <span class="flex items-center gap-1">
               <iconify-icon width="18" icon="mingcute:book-2-fill" ></iconify-icon>
-              <span>80 words, 1 min</span>
+              <span>282 words, 1 min</span>
             </span>
             <!-- Categories -->
             
@@ -558,7 +562,7 @@
 <div class="flex flex-wrap gap-1">
   
     
-      <a href="/tags/0402/" 
+      <a href="/tags/problem/" 
         class="
           tag
           text-sm
@@ -575,27 +579,7 @@
           dark:hover:text-[var(--c-10)]
           dark:hover:bg-[var(--c-theme)]
         ">
-        0402
-      </a>
-    
-      <a href="/tags/life/" 
-        class="
-          tag
-          text-sm
-          rounded-full
-          px-[5px]
-          border-[1px]
-          border-[var(--c-theme)]
-          text-[var(--c-theme)]
-          bg-[var(--c-0)]
-          dark:bg-[var(--c-0)]
-          dark:drop-shadow-none
-          hover:bg-[var(--c-theme)]
-          hover:text-[var(--c-0)]
-          dark:hover:text-[var(--c-10)]
-          dark:hover:bg-[var(--c-theme)]
-        ">
-        life
+        problem
       </a>
     
   
@@ -605,9 +589,31 @@
   </header>
   <!-- content -->
   <article class="post-content prose m-auto dark:prose-invert">
-    <p>​	由于我们是大学生，我们的周年纪念日在11月05日，当时正值周二，我们就打算周末出去好好庆祝一下。还有一个小原因……最近我们在存钱，所以经费不太够…..但是周二，我们还是去吃了个小火锅哈哈哈<img src="file:///D:\6.1.10.7\dict\Default\23452B339D38FDB6237392628BD1E2DC.png" alt="img"></p>
-<p><img src="C:\Users\黄馨雅\AppData\Local\Temp\1730800934274.png" alt="73080093427"></p>
+    <p>这是我的第一篇测试文章，不知道写些什么，就写一些我在搭建博客遇到的问题。</p>
+<h2 id="1-hexo图片插入无法显示问题"><a href="#1-hexo图片插入无法显示问题" class="headerlink" title="1.hexo图片插入无法显示问题"></a>1.hexo图片插入无法显示问题</h2><p>​	MarkDown 是支持在.md文件中使用 html 语法的，所以各位不妨尝试一下用 html 的图片语法插入图片，比如：</p>
+<img src="/path/to/your/image.png">
 
+<p>『src&#x3D;』 后面接的就是到你的图片的路径，建议用绝对路径。</p>
+<h2 id="2-spawn-failed和fatal-unable-to-access问题"><a href="#2-spawn-failed和fatal-unable-to-access问题" class="headerlink" title="2.spawn failed和fatal: unable to access问题"></a>2.spawn failed和fatal: unable to access问题</h2><ul>
+<li>原因分析:</li>
+</ul>
+<p>　其实出现这个问题，很大可能是因为https和http的proxy的对应的分别是https和http开proxy server，而https的proxy server可能无法正常工作。一个work around是把https的proxy <a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=613757923&content_type=Answer&match_order=3&q=server&zhida_source=entity">server</a>换成http的proxy server:</p>
+<p><strong>解决办法有三种</strong></p>
+<p>修改_config.yml文件的deploy部分，将https 修改为http url 或者 设置为git url, 配置为https oauth2 加token</p>
+<ul>
+<li>设置为git url(推荐)</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">    type: git</span><br><span class="line">    repo: git@github.com:your_github_id/your_github_id.github.io.git</span><br><span class="line">    branch: gh-pages</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将https 修改为http url</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line"> type: git</span><br><span class="line"> repo: http://github.com/your_github_id/your_github_id.github.io.git</span><br><span class="line"> branch: gh-pages</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在repo https url上要添加授权方式和token</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">        type: git</span><br><span class="line">        repo: https://oauth2:your_github_token@github.com/your_github_id/your_github_id.github.io.git</span><br><span class="line">        branch: gh-pages</span><br></pre></td></tr></table></figure>
   </article>
 
   <!-- prev and next -->
@@ -617,21 +623,20 @@
   ">
     <div>
       
+        <a href="/2024/11/05/%E6%88%91%E5%92%8C%E5%A5%B9%E5%9C%A8%E4%B8%80%E8%B5%B7%E4%BA%8C%E5%91%A8%E5%B9%B4%E5%95%A6%EF%BC%81%EF%BC%81%EF%BC%81/"
+          class="
+            transition-all
+            flex justify-center
+            hover:-translate-x-1
+            hover:text-[var(--c-80)]
+          ">
+          <iconify-icon width="20" icon="mingcute:left-fill" data-inline="false">
+          </iconify-icon>
+          我和她在一起二周年啦！！！
+        </a>
+      
     </div>
     <div>
-      
-        <a href="/2024/11/04/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"
-          class="
-            flex 
-            justify-center
-            hover:translate-x-1 
-            transition-transform
-            hover:text-[var(--c-100)]
-          "
-        >
-          第一篇博客
-          <iconify-icon width="20" icon="mingcute:right-fill" data-inline="false"></iconify-icon>
-        </a>
       
     </div>
   </div>
