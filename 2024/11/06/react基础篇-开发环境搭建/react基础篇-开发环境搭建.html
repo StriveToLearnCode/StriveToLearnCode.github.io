@@ -1,0 +1,143 @@
+<hr>
+<h2 id="title-JavaScript中this指向问题date-2024-11-05-18-28-50tags-“study”featured-true"><a href="#title-JavaScript中this指向问题date-2024-11-05-18-28-50tags-“study”featured-true" class="headerlink" title="title: JavaScript中this指向问题date: 2024-11-05 18:28:50tags:  - “study”featured: true"></a>title: JavaScript中this指向问题<br>date: 2024-11-05 18:28:50<br>tags:<br>  - “study”<br>featured: true</h2><p>​	this指向问题，其实有四个规则，理解了这四个规则一般this问题就难不倒了。</p>
+<h2 id="默认绑定"><a href="#默认绑定" class="headerlink" title="默认绑定"></a>默认绑定</h2><p>即：独立函数调用（使用默认绑定），他们的<u>this都指向window</u>，但是nodejs中指向空对象{}</p>
+<pre><code class="javascript">//案例一
+function foo(){
+  console.log(this)
+}
+foo()
+//案例二
+function test1() {
+    console.log(this)
+    test2()
+}
+function test2() {
+    console.log(this)
+    test3()
+}
+function test3() {
+    console.log(this)
+}
+test1()
+//案例三
+function foo(func){
+  func()
+}
+var obj = {
+    name:&quot;jack&quot;,
+    bar:function() {
+        console.log(this)
+    }
+}
+foo(obj.bar)
+</code></pre>
+<h2 id="隐式绑定"><a href="#隐式绑定" class="headerlink" title="隐式绑定"></a>隐式绑定</h2><p>通过某个对象进行调用的,<u>this的指向为该对象</u></p>
+<pre><code class="javascript">function foo(){
+  console.log(this)
+}
+var obj = {
+  name:&quot;jack&quot;,
+  foo:foo
+}
+obj.foo()
+</code></pre>
+<h2 id="显式绑定"><a href="#显式绑定" class="headerlink" title="显式绑定"></a>显式绑定</h2><ul>
+<li>通过call或者apply绑定this对象</li>
+</ul>
+<pre><code class="javascript">function foo() {
+  console.log(this)
+}
+foo.call(window)//window
+foo.call({name:&#39;jack&#39;,age:18})//{name:&#39;jack&#39;,age:18
+foo.call(123)//Number对象,存放123
+
+//apply、bind同理
+</code></pre>
+<h2 id="new绑定"><a href="#new绑定" class="headerlink" title="new绑定"></a>new绑定</h2><pre><code class="js">//创建Person类
+function Person(name) {
+  console.log(this)//Person {}
+  this.name = name
+}
+var p = new Person(&quot;why&quot;)
+console.log(p)//this指向Person{name:&quot;why&quot;}
+</code></pre>
+<hr>
+<h2 id="这些规则的优先级："><a href="#这些规则的优先级：" class="headerlink" title="这些规则的优先级："></a>这些规则的优先级：</h2><ul>
+<li>默认绑定的优先级是最低的</li>
+<li>显示绑定的优先级高于隐式绑定</li>
+</ul>
+<pre><code class="js">var obj = {
+  name:&#39;obj&#39;,
+  foo:function () {
+    console.log(this)
+  }
+}
+obj.foo.call(&#39;abc&#39;)//String{&quot;abc&quot;}
+</code></pre>
+<ul>
+<li>new绑定优先级高于隐式绑定</li>
+</ul>
+<pre><code class="js">var obj = {
+  name:&#39;obj&#39;,
+  foo:function () {
+    console.log(this)
+  }
+}
+
+var f = new obj.foo()//foo{}
+</code></pre>
+<ul>
+<li>new绑定高于显示绑定（new关键字不能和apply&#x2F;call一起使用）</li>
+</ul>
+<pre><code class="js">function foo(){
+  console.log(this)
+}
+var bar = foo.bind(&quot;aaa&quot;)
+var obj = new bar() //foo{}
+</code></pre>
+<p><strong>结论：new绑定 &gt; 显示绑定[apply&#x2F;call&#x2F;bind]&gt;隐式绑定[obj.foo()]&gt;默认绑定[foo( )]</strong></p>
+<hr>
+<h2 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h2><pre><code class="js">//当apply/call/bind:传入null和undefined
+function foo(){
+  console.log(this)
+}
+foo.call(null)//window
+foo.call(undefined)//window
+
+
+
+//面试中可能遇到的this
+var obj1 = {
+    name:&quot;obj1&quot;,
+  foo:function(){
+    console.log(this)
+  }
+}
+var obj1 = {
+    name:&quot;obj2&quot;,
+};
+//这里必须加 ； 如果不加词法解析的时候，会把这个代码和下面这行代码看作一个整体从而运行不了
+
+(obj2.bar = obj1.foo)() //window
+//看作是默认绑定
+</code></pre>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p>箭头函数不绑定this(所以call&#x2F;apply&#x2F;bind对它不生效)，它的this指向上层函数的this</p>
+<pre><code class="js">var obj = {
+  data:[],
+  getData:function () {
+    //没有箭头函数之前
+    //var _this = this
+    //setTimeout(function () {
+      //var res = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]
+      //_this.data = res
+    //},2000)
+    //有箭头函数之后
+    setTimeout(() =&gt; {
+      var res = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]
+      this.data = res
+    },2000)
+  }
+} 
+obj.getData()
+</code></pre>
+<p>注意：对象没有作用域</p>
