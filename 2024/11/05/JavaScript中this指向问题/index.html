@@ -539,7 +539,7 @@
             </div>
             <div class="flex items-center gap-1">
               <iconify-icon width="18" icon="mingcute:refresh-3-fill" ></iconify-icon>
-              Edited: <time class="w-max">2024-11-05</time>
+              Edited: <time class="w-max">2024-11-06</time>
             </div>
           </div>
           <div class="flex flex-wrap items-center gap-x-3 gap-y-3">
@@ -549,7 +549,7 @@
             <!-- Word count -->
             <span class="flex items-center gap-1">
               <iconify-icon width="18" icon="mingcute:book-2-fill" ></iconify-icon>
-              <span>539 words, 2 min</span>
+              <span>649 words, 3 min</span>
             </span>
             <!-- Categories -->
             
@@ -622,8 +622,12 @@
 
 <p><strong>结论：new绑定 &gt; 显示绑定[apply&#x2F;call&#x2F;bind]&gt;隐式绑定[obj.foo()]&gt;默认绑定[foo( )]</strong></p>
 <hr>
-<h2 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//当apply/call/bind:传入null和undefined</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">&#125;</span><br><span class="line">foo.<span class="title function_">call</span>(<span class="literal">null</span>)<span class="comment">//window</span></span><br><span class="line">foo.<span class="title function_">call</span>(<span class="literal">undefined</span>)<span class="comment">//window</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//面试中可能遇到的this</span></span><br><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line">	<span class="attr">name</span>:<span class="string">&quot;obj1&quot;</span>,</span><br><span class="line">  <span class="attr">foo</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line">	<span class="attr">name</span>:<span class="string">&quot;obj2&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//这里必须加 ； 如果不加词法解析的时候，会把这个代码和下面这行代码看作一个整体从而运行不了</span></span><br><span class="line"></span><br><span class="line">(obj2.<span class="property">bar</span> = obj1.<span class="property">foo</span>)() <span class="comment">//window</span></span><br><span class="line"><span class="comment">//看作是默认绑定</span></span><br></pre></td></tr></table></figure>
+<h2 id="特殊情况"><a href="#特殊情况" class="headerlink" title="特殊情况"></a>特殊情况</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//当apply/call/bind:传入null和undefined</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">&#125;</span><br><span class="line">foo.<span class="title function_">call</span>(<span class="literal">null</span>)<span class="comment">//window</span></span><br><span class="line">foo.<span class="title function_">call</span>(<span class="literal">undefined</span>)<span class="comment">//window</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//面试中可能遇到的this</span></span><br><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line">	<span class="attr">name</span>:<span class="string">&quot;obj1&quot;</span>,</span><br><span class="line">  <span class="attr">foo</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> obj1 = &#123;</span><br><span class="line">	<span class="attr">name</span>:<span class="string">&quot;obj2&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//这里必须加 ； 如果不加词法解析的时候，会把这个代码和下面这行代码看作一个整体从而运行不了</span></span><br><span class="line"></span><br><span class="line">(obj2.<span class="property">bar</span> = obj1.<span class="property">foo</span>)() <span class="comment">//window</span></span><br><span class="line"><span class="comment">//看作是默认绑定</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p>箭头函数不绑定this(所以call&#x2F;apply&#x2F;bind对它不生效)，它的this指向上层函数的this</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="attr">data</span>:[],</span><br><span class="line">  <span class="attr">getData</span>:<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">//没有箭头函数之前</span></span><br><span class="line">    <span class="comment">//var _this = this</span></span><br><span class="line">    <span class="comment">//setTimeout(function () &#123;</span></span><br><span class="line">      <span class="comment">//var res = [&quot;a&quot;,&quot;b&quot;,&quot;c&quot;]</span></span><br><span class="line">      <span class="comment">//_this.data = res</span></span><br><span class="line">    <span class="comment">//&#125;,2000)</span></span><br><span class="line">    <span class="comment">//有箭头函数之后</span></span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> res = [<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>,<span class="string">&quot;c&quot;</span>]</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">data</span> = res</span><br><span class="line">    &#125;,<span class="number">2000</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br><span class="line">obj.<span class="title function_">getData</span>()</span><br></pre></td></tr></table></figure>
+
+<p>注意：对象没有作用域</p>
 
   </article>
 
@@ -633,6 +637,18 @@
     gap-2 text-[var(--c-50)]
   ">
     <div>
+      
+        <a href="/2024/11/06/react%E5%9F%BA%E7%A1%80%E7%AF%87-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"
+          class="
+            transition-all
+            flex justify-center
+            hover:-translate-x-1
+            hover:text-[var(--c-80)]
+          ">
+          <iconify-icon width="20" icon="mingcute:left-fill" data-inline="false">
+          </iconify-icon>
+          react基础篇|开发环境搭建
+        </a>
       
     </div>
     <div>
